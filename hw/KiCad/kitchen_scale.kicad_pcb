@@ -1047,6 +1047,12 @@
     )
   )
 
+  (gr_circle (center 62 123) (end 62.8 123.6)
+    (stroke (width 0.1) (type default)) (fill none) (layer "Edge.Cuts") (tstamp 41d21813-89ae-4773-8be4-4237165db34b))
+  (gr_circle (center 118 77.2) (end 118.8 77.8)
+    (stroke (width 0.1) (type default)) (fill none) (layer "Edge.Cuts") (tstamp 42d75b6d-1077-4d24-b1bd-e021253fe61c))
+  (gr_circle (center 118 123) (end 118.8 123.6)
+    (stroke (width 0.1) (type default)) (fill none) (layer "Edge.Cuts") (tstamp 45065858-a590-4483-ade8-08fd960d5551))
   (gr_rect (start 60 75) (end 120 125)
     (stroke (width 0.1) (type default)) (fill none) (layer "Edge.Cuts") (tstamp c1862438-61d4-4610-99f3-37e1ca93ade7))
   (gr_text "Kitchen Scale 2.0\negsoft, 2025\nfor Nicole <3" (at 63.15 96.85) (layer "F.SilkS") (tstamp d98e2e00-1935-4101-b281-08508c460a7d)
