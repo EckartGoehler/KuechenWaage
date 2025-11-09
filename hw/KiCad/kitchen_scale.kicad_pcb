@@ -101,7 +101,7 @@
 
   (footprint "Button_Switch_THT:SW_PUSH-12mm" (layer "F.Cu")
     (tstamp 66a9c810-f983-46b8-9b38-5dc4c51a613f)
-    (at 65.76 115.5)
+    (at 66.76 115.5)
     (descr "SW PUSH 12mm https://www.e-switch.com/system/asset/product_line/data_sheet/143/TL1100.pdf")
     (tags "tact sw push 12mm")
     (property "Sheetfile" "kitchen_scale.kicad_sch")
@@ -173,7 +173,7 @@
 
   (footprint "Connector_PinSocket_2.54mm:PinSocket_1x04_P2.54mm_Vertical" (layer "F.Cu")
     (tstamp 6b1d57d0-515e-4b39-a7a2-be56cd834c24)
-    (at 78.2 76.975 90)
+    (at 79 76.975 90)
     (descr "Through hole straight socket strip, 1x04, 2.54mm pitch, single row (from Kicad 4.0.7), script generated")
     (tags "Through hole socket strip THT 1x04 2.54mm single row")
     (property "Sheetfile" "kitchen_scale.kicad_sch")
@@ -241,7 +241,7 @@
 
   (footprint "Button_Switch_THT:SW_PUSH-12mm" (layer "F.Cu")
     (tstamp 73eaaf55-7eb2-44a5-957d-3040417e03b4)
-    (at 82.76 115.5)
+    (at 83.76 115.5)
     (descr "SW PUSH 12mm https://www.e-switch.com/system/asset/product_line/data_sheet/143/TL1100.pdf")
     (tags "tact sw push 12mm")
     (property "Sheetfile" "kitchen_scale.kicad_sch")
@@ -385,7 +385,7 @@
 
   (footprint "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" (layer "F.Cu")
     (tstamp 8c9c0205-970f-49a7-95d2-31a1c2c9e0ef)
-    (at 77.19 82)
+    (at 82.69 83)
     (descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=7.62mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
     (tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 7.62mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
     (property "Sheetfile" "kitchen_scale.kicad_sch")
@@ -451,7 +451,7 @@
 
   (footprint "Mine:DEBO1_3_7LI_1_0A_charge_controller" (layer "F.Cu")
     (tstamp 95bbf93e-63ef-4f65-b6b2-b04e55dcd31c)
-    (at 61.3 92.5)
+    (at 60.8 92.5)
     (descr "Texas Instruments EUS 5 Pin Double Sided Module")
     (tags "module pcb")
     (property "Sheetfile" "kitchen_scale.kicad_sch")
@@ -645,7 +645,7 @@
 
   (footprint "Module:WEMOS_D1_mini_light" (layer "F.Cu")
     (tstamp b0b64595-51b9-47a5-ac97-b91b0457ee16)
-    (at 115.86 102 180)
+    (at 116.86 102 180)
     (descr "16-pin module, column spacing 22.86 mm (900 mils), https://wiki.wemos.cc/products:d1:d1_mini, https://c1.staticflickr.com/1/734/31400410271_f278b087db_z.jpg")
     (tags "ESP8266 WiFi microcontroller")
     (property "Sheetfile" "kitchen_scale.kicad_sch")
@@ -829,7 +829,7 @@
 
   (footprint "Connector_PinHeader_2.54mm:PinHeader_2x04_P2.54mm_Vertical" (layer "F.Cu")
     (tstamp b91b04e6-4f34-4cbc-a9cb-374c2fc84a1b)
-    (at 64.46 79.54 90)
+    (at 63.96 79.5 90)
     (descr "Through hole straight pin header, 2x04, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x04 2.54mm double row")
     (property "Sheetfile" "kitchen_scale.kicad_sch")
@@ -909,7 +909,7 @@
 
   (footprint "Button_Switch_THT:SW_PUSH-12mm" (layer "F.Cu")
     (tstamp badd0500-6d54-4e3f-852b-4b3ae5f3dd84)
-    (at 99.76 115.5)
+    (at 100.76 115.5)
     (descr "SW PUSH 12mm https://www.e-switch.com/system/asset/product_line/data_sheet/143/TL1100.pdf")
     (tags "tact sw push 12mm")
     (property "Sheetfile" "kitchen_scale.kicad_sch")
@@ -979,7 +979,7 @@
     )
   )
 
-  (gr_rect (start 60 75) (end 119 125)
+  (gr_rect (start 60 75) (end 120 125)
     (stroke (width 0.1) (type default)) (fill none) (layer "Edge.Cuts") (tstamp c1862438-61d4-4610-99f3-37e1ca93ade7))
 
 )
