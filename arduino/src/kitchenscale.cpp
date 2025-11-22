@@ -48,8 +48,6 @@ double single_weight_sigma = 0.1;
 
 void setup()
 {
-
-  ESP.wdtDisable();
   Serial.begin(57600);
 
   // output of LED to report measurement update
