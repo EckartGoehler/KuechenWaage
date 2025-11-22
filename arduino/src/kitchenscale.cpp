@@ -22,8 +22,8 @@
 #define DISPLAYED_WEIGHT_FRACTION 10
 
 // HX711 circuit wiring
-const int LOADCELL_DOUT_PIN = 2;
-const int LOADCELL_SCK_PIN = 3;
+const int LOADCELL_DOUT_PIN = 4;
+const int LOADCELL_SCK_PIN = 0;
 
 // the loadcell ADC access class
 HX711 scale;
@@ -49,7 +49,8 @@ double single_weight_sigma = 0.1;
 void setup()
 {
 
-    Serial.begin(57600);
+  ESP.wdtDisable();
+  Serial.begin(57600);
 
   // output of LED to report measurement update
   pinMode(LED_BUILTIN, OUTPUT);
@@ -66,8 +67,8 @@ void setup()
   //   single_weight_sigma = raw_sigma / scaling;
   // }
   
-
-	Serial.println("Tarieren");
+  Serial.println("");
+	Serial.println("Start");
 
   // Initialize library with data output pin, clock input pin and gain factor.
   // Channel selection is made by passing the appropriate gain:
@@ -76,6 +77,9 @@ void setup()
   // By omitting the gain factor parameter, the library
   // default "128" (Channel A) is used here.
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
+
+  Serial.println("Tarieren");
+
 
   scale.set_scale(scaling);    // this value is obtained by calibrating the scale with known weights; see the README for details
   scale.tare(5);
