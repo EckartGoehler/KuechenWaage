@@ -5,6 +5,7 @@
 #include <Wire.h> 
 #include "stdio.h" // snprintf
 #include "HX711.h"
+#include <Adafruit_ST7789.h> // Hardware-specific library for ST7789
 
 //#define DEBUG 1
 

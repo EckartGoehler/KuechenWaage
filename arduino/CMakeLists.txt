@@ -13,23 +13,12 @@ project ( KitchenScale CXX)
 
 
 
-include_directories (
-	../lib/calc_dream/src
-	libraries/Adafruit_BusIO/src
-	libraries/Adafruit_GFX/src
-	libraries/Adafruit_GFX/Fonts
-	libraries/Adafruit_ST7735_and_ST7789_Library
-	libraries/Adafruit_ILI9341
-	libraries/HX711/src
-	)
+  include_directories (
+  	libraries/Adafruit_BusIO/src
+  	)
 
 set(SRCDIR "src")
 
-
-message (STATUS "\n-- Adding TFT Libraries")
-message (STATUS "=======================\n")
-#add_subdirectory (libraries/Adafruit_ST7735_and_ST7789_Library "${CMAKE_CURRENT_BINARY_DIR}/Adafruit_ST7735_and_ST7789_Library")
-# add_subdirectory (libraries/Adafruit_GFX "${CMAKE_CURRENT_BINARY_DIR}/Adafruit_GFX")
 
 # ----------------------------
 # main App: KitchenScale
@@ -42,6 +31,8 @@ add_executable(KitchenScale src/kitchenscale.cpp)
 
 target_link_arduino_libraries(KitchenScale PRIVATE HX711 Wire core)
 
+
+target_link_arduino_libraries(KitchenScale PRIVATE Adafruit_BusIO Adafruit_GFX Adafruit_ST77xx )
 
 # This is needed for the generation of HEX binary and uploading it
 target_enable_arduino_upload(KitchenScale)
