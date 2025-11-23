@@ -15,6 +15,7 @@ project ( KitchenScale CXX)
 
   include_directories (
   	libraries/Adafruit_BusIO/src
+	libraries/Adafruit_GFX/
   	)
 
 set(SRCDIR "src")
@@ -23,14 +24,10 @@ set(SRCDIR "src")
 # ----------------------------
 # main App: KitchenScale
 
-#file(GLOB ScaleAppSrcFiles 
-#	"${SRCDIR}/kitchenscale.cpp"
-#	)
 
 add_executable(KitchenScale src/kitchenscale.cpp)
 
 target_link_arduino_libraries(KitchenScale PRIVATE HX711 Wire core)
-
 
 target_link_arduino_libraries(KitchenScale PRIVATE Adafruit_BusIO Adafruit_GFX Adafruit_ST77xx )
 
@@ -44,3 +41,10 @@ add_executable(blink src/blink.cpp)
 
 target_link_arduino_libraries(blink PRIVATE core )
 target_enable_arduino_upload(blink)
+
+# ----------------------------
+#test app: display
+add_executable(display src/displaytest_1_77.cpp)
+
+target_link_arduino_libraries(display PRIVATE core Adafruit_BusIO Adafruit_GFX Adafruit_ST77xx )
+target_enable_arduino_upload(display)

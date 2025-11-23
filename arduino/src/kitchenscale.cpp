@@ -6,6 +6,7 @@
 #include "stdio.h" // snprintf
 #include "HX711.h"
 #include <Adafruit_ST7789.h> // Hardware-specific library for ST7789
+#include <Adafruit_ST7735.h> // Hardware-specific library for ST7735
 
 //#define DEBUG 1
 
@@ -14,6 +15,11 @@
 #else
  #define DEBUG_OUTPUT " "
 #endif 
+
+// Pin definitions (actually GPIO numbers)
+#define TFT_CS         15
+#define TFT_RST        -1 // Or set to -1 and connect to Arduino RESET pin
+#define TFT_DC         16
  
 #define EEPROM_SCALE_ADDR  (0 * sizeof(double))
 #define EEPROM_SIGMA_ADDR  (1 * sizeof(double))
@@ -28,6 +34,9 @@ const int LOADCELL_SCK_PIN = 0;
 
 // the loadcell ADC access class
 HX711 scale;
+
+// For 1.44" and 1.8" TFT with ST7735 use:
+Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
 
 double scaling = 1./(1000./379351.56);
@@ -68,6 +77,7 @@ void setup()
   
   Serial.println("");
 	Serial.println("Start");
+  
 
   // Initialize library with data output pin, clock input pin and gain factor.
   // Channel selection is made by passing the appropriate gain:
@@ -85,6 +95,7 @@ void setup()
   scale.tare(tare_average_num);                // reset the scale to 0
   Serial.println("Completed");
 
+  tft.initR(INITR_GREENTAB);
 }
 
 bool blink_on = false;
@@ -147,4 +158,8 @@ void loop()
             );
 
   Serial.println(out);
+  tft.fillScreen(ST77XX_BLACK);
+  tft.setCursor(0, 0);
+  tft.print(out);
+
 }
