@@ -46,6 +46,16 @@ target_enable_arduino_upload(CalibrateScale)
 
 
 # ----------------------------
+# test App: serial_scale
+
+
+add_executable(SerialScale src/scale_serial.cpp)
+target_link_arduino_libraries(SerialScale PRIVATE HX711 Wire EEPROM core )
+
+# This is needed for the generation of HEX binary and uploading it
+target_enable_arduino_upload(SerialScale)
+
+# ----------------------------
 #test app: blink
 
 add_executable(blink src/blink.cpp)
