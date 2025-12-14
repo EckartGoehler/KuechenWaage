@@ -106,10 +106,11 @@ void loop()
   
   // fetch new value, averaged:
   double single_weight = scale.get_units(1);
+  long raw_value =  scale.read();
 
 
-    char out[17];
-    snprintf(out,sizeof(out), "%f",single_weight);
+    char out[50];
+    snprintf(out,sizeof(out), "scaled: %f raw: %d",single_weight, raw_value);
     Serial.println(out);
 
   delay(1000);
