@@ -11,8 +11,8 @@
 #include <math.h>
 
 // HX711 circuit wiring
-const int LOADCELL_DOUT_PIN = 2;
-const int LOADCELL_SCK_PIN = 3;
+const int LOADCELL_DOUT_PIN = 4;
+const int LOADCELL_SCK_PIN = 0;
 
 #define EEPROM_SCALE_ADDR  (0 * sizeof(double))
 #define EEPROM_SIGMA_ADDR  (1 * sizeof(double))
@@ -35,8 +35,11 @@ void setup() {
   EEPROM.begin(256);
 
   // load latest scaling
-  if (EEPROM.read(EEPROM_SCALE_ADDR) != 255) {
+  if (EEPROM.read(EEPROM_SCALE_ADDR) != 0) {    
     EEPROM.get(EEPROM_SCALE_ADDR,scaling);
+    Serial.print("EEPROM stored scaling: "); Serial.print(scaling); Serial.println();
+    Serial.print("EEPROM[0]: "); Serial.print(EEPROM.read(EEPROM_SCALE_ADDR)); Serial.println();
+
   }
 
 
@@ -55,8 +58,9 @@ void setup() {
   Serial.println("Running zero offset estimation");
   uint32_t offset_sum =0;
   for (uint8_t i=0; i < offset_num; i++) {
-    while(!scale.is_ready())
-      /*wait*/;
+    while(!scale.is_ready()) {
+      delay(100);
+    }
     offset_sum += scale.read();
   }
 
@@ -68,8 +72,9 @@ void setup() {
   double sigma_sqr_sum = 0;
   for (uint32_t i=0; i < sigma_num; i++) {
     double val;
-    while(!scale.is_ready())
-      /*wait*/;
+    while(!scale.is_ready()) {
+            delay(100);
+    }
     val =  scale.read();
     val -= raw_offset; // to keep numerics small
     sigma_sum += val;
@@ -89,8 +94,9 @@ void setup() {
   
   // quest for calibration weight    
   Serial.println("Please put calibration weight on scale and then enter its weight in gramm:");
-  while(Serial.available() == 0)
-    /*wait*/;
+  while(Serial.available() == 0){
+      delay(100);
+    }
   double calibration_weight = Serial.parseInt();
   Serial.print("You entered a weight of "); Serial.print(calibration_weight); Serial.println("g");
   
@@ -98,9 +104,13 @@ void setup() {
   Serial.println("Running calibration");
   uint32_t calibration_measurement_sum = 0;
   for (uint8_t i=0; i < calibration_num; i++) {
-    while(!scale.is_ready())
-      /*wait*/;
-    calibration_measurement_sum += scale.read();
+    while(!scale.is_ready()) {
+      delay(100);
+    }
+    uint32_t val;
+    val = scale.read();
+    calibration_measurement_sum += val;
+    Serial.print("Val: "); Serial.print(val); Serial.println();
   }
 
   double raw_calibration_measurement_average = double(calibration_measurement_sum)/calibration_num - raw_offset;
