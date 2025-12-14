@@ -1,12 +1,15 @@
 // Eine Küchenwaage, mit Wägezelle für HX711 AD, 5kg, und Display-Ausgabe
 // $Id:$
 
+
 #include "Arduino.h"
 #include <Wire.h> 
 #include "stdio.h" // snprintf
 #include "HX711.h"
 #include <Adafruit_ST7789.h> // Hardware-specific library for ST7789
 #include <Adafruit_ST7735.h> // Hardware-specific library for ST7735
+#include <Fonts/FreeSansBold9pt7b.h>
+#include <EEPROM.h>
 
 //#define DEBUG 1
 
@@ -59,6 +62,16 @@ double single_weight_sigma = 0.1;
 void setup()
 {
   Serial.begin(57600);
+  EEPROM.begin(256);
+
+  // load latest EEPROM parameters 
+  if (EEPROM.read(EEPROM_SCALE_ADDR) != 255) {
+    EEPROM.get(EEPROM_SCALE_ADDR,scaling);
+  }
+
+  if (EEPROM.read(EEPROM_SIGMA_ADDR) != 255) {
+    EEPROM.get(EEPROM_SIGMA_ADDR,single_weight_sigma);
+  }
 
   // output of LED to report measurement update
   pinMode(LED_BUILTIN, OUTPUT);
@@ -79,6 +92,7 @@ void setup()
 	Serial.println("Start");
   
 
+
   // Initialize library with data output pin, clock input pin and gain factor.
   // Channel selection is made by passing the appropriate gain:
   // - With a gain factor of 64 or 128, channel A is selected
@@ -96,6 +110,13 @@ void setup()
   Serial.println("Completed");
 
   tft.initR(INITR_GREENTAB);
+  tft.fillScreen(ST77XX_BLACK);
+  tft.setFont(&FreeSansBold9pt7b);
+  tft.setTextColor(ST77XX_WHITE, ST77XX_BLACK);
+
+  tft.setTextSize(2);
+  tft.setFont(); // reset font to default
+  tft.setRotation(1);
 }
 
 bool blink_on = false;
@@ -158,8 +179,7 @@ void loop()
             );
 
   Serial.println(out);
-  tft.fillScreen(ST77XX_BLACK);
-  tft.setCursor(0, 0);
+  tft.setCursor(0, 20);          
   tft.print(out);
 
 }

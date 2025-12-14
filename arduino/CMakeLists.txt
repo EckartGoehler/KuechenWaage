@@ -27,12 +27,23 @@ set(SRCDIR "src")
 
 add_executable(KitchenScale src/kitchenscale.cpp)
 
-target_link_arduino_libraries(KitchenScale PRIVATE HX711 Wire core)
+target_link_arduino_libraries(KitchenScale PRIVATE HX711 Wire EEPROM core )
 
 target_link_arduino_libraries(KitchenScale PRIVATE Adafruit_BusIO Adafruit_GFX Adafruit_ST77xx )
 
 # This is needed for the generation of HEX binary and uploading it
 target_enable_arduino_upload(KitchenScale)
+
+# ----------------------------
+# auxillary App: calibrate_kitchenscale
+
+
+add_executable(CalibrateScale src/calibrate_kitchenscale.cpp)
+target_link_arduino_libraries(CalibrateScale PRIVATE HX711 Wire EEPROM core )
+
+# This is needed for the generation of HEX binary and uploading it
+target_enable_arduino_upload(CalibrateScale)
+
 
 # ----------------------------
 #test app: blink

@@ -3,9 +3,12 @@
  * $Id:$
  * Eckart Goehler, August 2019
 */
-
+#include "Arduino.h"
+#include <Wire.h> 
+#include "stdio.h" // snprintf
 #include "HX711.h"
 #include <EEPROM.h>
+#include <math.h>
 
 // HX711 circuit wiring
 const int LOADCELL_DOUT_PIN = 2;
@@ -28,6 +31,8 @@ const uint32_t gain_factor = 128; // could be 128 (default), 64 or 32 (channel B
 void setup() {
   Serial.begin(57600);
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN,gain_factor);
+
+  EEPROM.begin(256);
 
   // load latest scaling
   if (EEPROM.read(EEPROM_SCALE_ADDR) != 255) {
@@ -115,6 +120,8 @@ void setup() {
 // write offset to EEPROM
   EEPROM.put(EEPROM_OFFSET_ADDR,raw_offset);
   Serial.println("Saved raw offset to EEPROM");  
+
+  EEPROM.commit();
   
 }
 
