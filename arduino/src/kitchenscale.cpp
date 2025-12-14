@@ -64,29 +64,21 @@ void setup()
   Serial.begin(57600);
   EEPROM.begin(256);
 
-  // load latest EEPROM parameters 
-  if (EEPROM.read(EEPROM_SCALE_ADDR) != 255) {
-    EEPROM.get(EEPROM_SCALE_ADDR,scaling);
-  }
-
-  if (EEPROM.read(EEPROM_SIGMA_ADDR) != 255) {
-    EEPROM.get(EEPROM_SIGMA_ADDR,single_weight_sigma);
-  }
-
+  
   // output of LED to report measurement update
   pinMode(LED_BUILTIN, OUTPUT);
 
-  // // read scaling factor from EEPROM, if there is any:
-  // if (EEPROM.read(EEPROM_SCALE_ADDR) != 255) {
-  //   EEPROM.get(EEPROM_SCALE_ADDR,scaling);
-  // }
+  // read scaling factor from EEPROM, if there is any:
+  if (EEPROM.read(EEPROM_SCALE_ADDR) != 0) {
+    EEPROM.get(EEPROM_SCALE_ADDR,scaling);
+  }
 
-  // // read sigma from EEPROM, if there is any:
-  // if (EEPROM.read(EEPROM_SIGMA_ADDR) != 255) {
-  //   double raw_sigma;
-  //   EEPROM.get(EEPROM_SIGMA_ADDR,raw_sigma);
-  //   single_weight_sigma = raw_sigma / scaling;
-  // }
+  // read sigma from EEPROM, if there is any:
+  if (EEPROM.read(EEPROM_SIGMA_ADDR) != 0) {
+    double raw_sigma;
+    EEPROM.get(EEPROM_SIGMA_ADDR,raw_sigma);
+    single_weight_sigma = raw_sigma / scaling;
+  }
   
   Serial.println("");
 	Serial.println("Start");
