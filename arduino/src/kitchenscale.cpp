@@ -34,6 +34,14 @@
 // HX711 circuit wiring
 const int LOADCELL_DOUT_PIN = 4;
 const int LOADCELL_SCK_PIN = 0;
+const int BUTTON_TARE_PIN = 5; 
+
+// button variables
+unsigned long tare_started_millisec = 0;
+static const unsigned long TARE_DEBOUNCE_WINDOW = 500;
+const int TARE_NUM = 5; // number of samples for tare
+
+
 
 // the loadcell ADC access class
 HX711 scale;
@@ -97,7 +105,7 @@ void setup()
 
 
   scale.set_scale(scaling);    // this value is obtained by calibrating the scale with known weights; see the README for details
-  scale.tare(1);
+  scale.tare(TARE_NUM);
   scale.tare(tare_average_num);                // reset the scale to 0
   Serial.println("Completed");
 
@@ -109,6 +117,8 @@ void setup()
   tft.setTextSize(2);
   tft.setFont(); // reset font to default
   tft.setRotation(1);
+  pinMode(BUTTON_TARE_PIN, INPUT_PULLUP);
+
 }
 
 bool blink_on = false;
@@ -173,5 +183,14 @@ void loop()
   Serial.println(out);
   tft.setCursor(0, 20);          
   tft.print(out);
+
+  // check for tare button press
+  bool tare_button_pressed = digitalRead(BUTTON_TARE_PIN) == 0;
+  if (tare_button_pressed && millis() - tare_started_millisec > TARE_DEBOUNCE_WINDOW) {
+    tare_started_millisec = millis();
+    scale.tare(TARE_NUM);
+    measurement_averaged_num = 0;
+  } 
+
 
 }
