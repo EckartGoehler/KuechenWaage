@@ -97,7 +97,7 @@ void setup()
 
 
   scale.set_scale(scaling);    // this value is obtained by calibrating the scale with known weights; see the README for details
-  scale.tare(5);
+  scale.tare(1);
   scale.tare(tare_average_num);                // reset the scale to 0
   Serial.println("Completed");
 
