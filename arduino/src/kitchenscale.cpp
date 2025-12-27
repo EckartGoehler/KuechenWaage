@@ -105,8 +105,7 @@ void setup()
 
 
   scale.set_scale(scaling);    // this value is obtained by calibrating the scale with known weights; see the README for details
-  scale.tare(TARE_NUM);
-  scale.tare(tare_average_num);                // reset the scale to 0
+  scale.tare(1);
   Serial.println("Completed");
 
   tft.initR(INITR_GREENTAB);
@@ -114,11 +113,20 @@ void setup()
   tft.setFont(&FreeSansBold9pt7b);
   tft.setTextColor(ST77XX_WHITE, ST77XX_BLACK);
 
+  
   tft.setTextSize(2);
   tft.setFont(); // reset font to default
-  tft.setRotation(1);
+  tft.setRotation(3);
+  
+  tft.setCursor(5, 20);
+  tft.print("Let's start!");          
+
+
   pinMode(BUTTON_TARE_PIN, INPUT_PULLUP);
 
+  scale.tare(tare_average_num);                // reset the scale to 0
+  tft.fillScreen(ST77XX_BLACK);
+  
 }
 
 bool blink_on = false;
